@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>com.github.chrisbanes.photoview</groupId>
-	<artifactId>library</artifactId>
+	<artifactId>photoview-library</artifactId>
 	<packaging>jar</packaging>
 	<name>PhotoView Library</name>
 	
@@ -15,7 +15,7 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>com.google.android</groupId>
+			<groupId>android</groupId>
 			<artifactId>android</artifactId>
 		</dependency>
 	</dependencies>
