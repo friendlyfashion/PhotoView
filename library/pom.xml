@@ -7,6 +7,7 @@
         <groupId>com.github.chrisbanes.photoview</groupId>
         <artifactId>parent</artifactId>
         <version>1.2.1</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>photoview-library</artifactId>
