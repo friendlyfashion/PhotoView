@@ -29,7 +29,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 
 public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGestureDetector.OnGestureListener,
 		GestureDetector.OnDoubleTapListener, ViewTreeObserver.OnGlobalLayoutListener {
@@ -103,7 +103,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 		}
 	}
 
-	private WeakReference<ImageView> mImageView;
+	private SoftReference<ImageView> mImageView;
 	private ViewTreeObserver mViewTreeObserver;
 
 	// Gesture Detectors
@@ -131,7 +131,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 	private ScaleType mScaleType = ScaleType.FIT_CENTER;
 
 	public PhotoViewAttacher(ImageView imageView) {
-		mImageView = new WeakReference<ImageView>(imageView);
+		mImageView = new SoftReference<ImageView>(imageView);
 
 		imageView.setOnTouchListener(this);
 
@@ -604,7 +604,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 
 	/**
 	 * Helper method that maps the supplied Matrix to the current Drawable
-	 * 
+	 *
 	 * @param matrix - Matrix to map Drawable against
 	 * @return RectF - Displayed Rectangle
 	 */
@@ -624,7 +624,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 
 	/**
 	 * Helper method that 'unpacks' a Matrix and returns the required value
-	 * 
+	 *
 	 * @param matrix - Matrix to unpack
 	 * @param whichValue - Which value from Matrix.M* to return
 	 * @return float - returned value
@@ -662,7 +662,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 
 	/**
 	 * Calculate Matrix for FIT_CENTER
-	 * 
+	 *
 	 * @param d - Drawable being displayed
 	 */
 	private void updateBaseMatrix(Drawable d) {
@@ -728,7 +728,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 	/**
 	 * Interface definition for a callback to be invoked when the internal
 	 * Matrix has changed for this View.
-	 * 
+	 *
 	 * @author Chris Banes
 	 */
 	public static interface OnMatrixChangedListener {
@@ -736,7 +736,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 		 * Callback for when the Matrix displaying the Drawable has changed.
 		 * This could be because the View's bounds have changed, or the user has
 		 * zoomed.
-		 * 
+		 *
 		 * @param rect - Rectangle displaying the Drawable's new bounds.
 		 */
 		void onMatrixChanged(RectF rect);
@@ -745,7 +745,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 	/**
 	 * Interface definition for a callback to be invoked when the Photo is
 	 * tapped with a single tap.
-	 * 
+	 *
 	 * @author Chris Banes
 	 */
 	public static interface OnPhotoTapListener {
@@ -754,7 +754,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 		 * A callback to receive where the user taps on a photo. You will only
 		 * receive a callback if the user taps on the actual photo, tapping on
 		 * 'whitespace' will be ignored.
-		 * 
+		 *
 		 * @param view - View the user tapped.
 		 * @param x - where the user tapped from the of the Drawable, as
 		 *            percentage of the Drawable width.
@@ -767,7 +767,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 	/**
 	 * Interface definition for a callback to be invoked when the ImageView is
 	 * tapped with a single tap.
-	 * 
+	 *
 	 * @author Chris Banes
 	 */
 	public static interface OnViewTapListener {
@@ -776,7 +776,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 		 * A callback to receive where the user taps on a ImageView. You will
 		 * receive a callback if the user taps anywhere on the view, tapping on
 		 * 'whitespace' will not be ignored.
-		 * 
+		 *
 		 * @param view - View the user tapped.
 		 * @param x - where the user tapped from the left of the View.
 		 * @param y - where the user tapped from the top of the View.
@@ -888,7 +888,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 
 		@Override
 		public void run() {
-			ImageView imageView = getImageView();
+            ImageView imageView = getImageView();
 			if (null != imageView && mScroller.computeScrollOffset()) {
 
 				final int newX = mScroller.getCurrX();
