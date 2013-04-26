@@ -176,7 +176,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 	 */
 	@SuppressWarnings("deprecation")
 	public final void cleanup() {
-		if (null != mImageView) {
+		if (null != mImageView && mImageView.get() != null) {
 			mImageView.get().getViewTreeObserver().removeGlobalOnLayoutListener(this);
 		}
 		mViewTreeObserver = null;
@@ -206,8 +206,6 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 		// If we don't have an ImageView, call cleanup()
 		if (null == imageView) {
 			cleanup();
-			throw new IllegalStateException(
-					"ImageView no longer exists. You should not use this PhotoViewAttacher any more.");
 		}
 
 		return imageView;
